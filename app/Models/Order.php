@@ -8,7 +8,15 @@ use Carbon\Carbon;
 class Order extends Model
 {
 
-    protected $fillable = ['start_latitude', 'start_longitude', 'end_latitude', 'end_longitude','status'];
+    protected $fillable = [
+        'start_latitude', 
+        'start_longitude', 
+        'end_latitude', 
+        'end_longitude', 
+        'distance', 
+        'status'
+    ];
+
     public $timestamps = false;
 
     /**
@@ -18,10 +26,11 @@ class Order extends Model
 
         $order = self::create(
             [
-                'start_latitude' => $parameters['origin'][0],
-                'start_longitude' => $parameters['origin'][1],
-                'end_latitude' => $parameters['destination'][0],
-                'end_longitude' => $parameters['destination'][1],
+                'start_latitude' => $parameters['start_latitude'],
+                'start_longitude' => $parameters['start_longitude'],
+                'end_latitude' => $parameters['end_latitude'],
+                'end_longitude' => $parameters['end_longitude'],
+                'distance' => $parameters['distance'],
                 'status' => config('app.order_status.unassign'),
                 'created_at' => Carbon::now()->toDateTimeString()
             ]
@@ -38,7 +47,7 @@ class Order extends Model
         
         $order->status = config('app.order_status.success');
         $order->save();
-        
+
         return $order;
     }
 
@@ -46,8 +55,9 @@ class Order extends Model
     /**
      * List of orders
      */
-    static public function list() {
+    static public function list($start, $limit) {
 
+        return self::select('id', 'distance', 'status')->skip($start)->take($limit)->get();
     }
 
 }

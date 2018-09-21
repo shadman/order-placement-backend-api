@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Facade\OrderFacade;
 use App\Validators\OrderValidator;
-use App\Helpers\ErrorResponse;
+use App\Helpers\ErrorResponseHelper;
 
 class OrderController extends Controller
 {
@@ -34,7 +34,7 @@ class OrderController extends Controller
             return OrderFacade::createOrder($parameters);
         }
 
-        return ErrorResponse::invalidError('ERROR_DESCRIPTION');
+        return ErrorResponseHelper::invalidError('ERROR_DESCRIPTION');
     }
 
 
@@ -50,10 +50,10 @@ class OrderController extends Controller
 
         $validator = OrderValidator::take($parameters);
         if (!$validator->fails()) {
-            return OrderFacade::updateOrder($parameters, $id);
+            return OrderFacade::updateOrder($id);
         }
 
-        return ErrorResponse::invalidError('ERROR_DESCRIPTION');
+        return ErrorResponseHelper::invalidError('ERROR_DESCRIPTION');
     }
 
 
@@ -65,8 +65,17 @@ class OrderController extends Controller
      */
     public function list(Request $request){
 
-        echo 'place code here';
+        $parameters = [
+            'page' => $request->input('page'),
+            'limit' => $request->input('limit')
+        ];
 
+        $validator = OrderValidator::listing($parameters);
+        if (!$validator->fails()) {
+            return OrderFacade::ordersList($parameters['page'], $parameters['limit']);
+        }
+
+        return ErrorResponseHelper::invalidError('ERROR_DESCRIPTION');
     }
 
 }

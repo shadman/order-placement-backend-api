@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 use Illuminate\Http\Response as HttpResponse;
 
-class ErrorResponse
+class ErrorResponseHelper
 {
 
     public static function invalidError($message)

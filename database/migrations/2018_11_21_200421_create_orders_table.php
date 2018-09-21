@@ -19,8 +19,9 @@ class CreateOrdersTable extends Migration
             $table->decimal('start_longitude', 10, 0);
             $table->decimal('end_latitude', 10, 0);
             $table->decimal('end_longitude', 10, 0);
+            $table->decimal('distance', 10, 2);
             $table->enum('status', array('UNASSIGN', 'SUCCESS '));
-            $table->timestamp('created_at'); 
+            $table->timestamp('created_at');
         });
     }
 

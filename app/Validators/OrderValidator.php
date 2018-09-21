@@ -28,4 +28,15 @@ class OrderValidator
         return Validator::make($parameters, $rules);
     }
 
+
+    public static function listing($parameters)
+    {
+        $rules = [
+            'page' => 'required|integer|min:1|max:1000',
+            'limit' => 'required|integer|min:1|max:20'
+        ];
+        
+        return Validator::make($parameters, $rules);
+    }
+
 }
