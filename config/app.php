@@ -100,12 +100,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Predefined Roles Configuration
+    | Predefined Status Configuration
     |--------------------------------------------------------------------------
     |
-    | Here you may configure the roles of users for projects
+    | Here you may configure all statuses of orders
     |
     */
-    'roles' => array('member'=>'member', 'creator' => 'creator'),
+    'order_status' => ['unassign'=>'UNASSIGN', 'success'=>'SUCCESS'],
 
 ];
