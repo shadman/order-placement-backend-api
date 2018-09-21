@@ -2,6 +2,8 @@ FROM php:7.1-fpm
 
 COPY ./php.ini /usr/local/etc/php/
 
+RUN chmod o+r /etc/resolv.conf
+
 RUN apt-get update && apt-get install -y \
     libpq-dev \
     curl

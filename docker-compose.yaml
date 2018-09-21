@@ -2,6 +2,7 @@ version: '3'
 services:
   ### PHP-FPM Container
   php-fpm:
+    container_name: php-fpm
     build: ./build/php-fpm
     volumes:
       - ./:/var/www
@@ -15,9 +16,10 @@ services:
   
   ### NGINX Container
   nginx:
+    container_name: nginx
     build: ./build/nginx
     volumes:
-      - ./logs/nginx/:/var/log/nginx
+      - ./var/www/storage/logs/nginx/:/var/log/nginx
       - ./:/var/www
     ports:
       - "8080:80"
@@ -29,22 +31,26 @@ services:
 
   ### MySQL Container
   mysql:
+    container_name: mysql
     build: ./build/mysql
     volumes:
       - /var/lib/mysql
     expose:
       - "3306"
+    volumes:
+    - ./data/mysql/:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: ${DB_NAME}
-      MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD: ${DB_PASS}
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     networks:
       ordernet:
         ipv4_address: 172.21.0.3
 
   ### Application Code Container
   application:
+    container_name: application
     build: ./build/application
     networks:
       ordernet:
@@ -52,10 +58,15 @@ services:
 
   ### Workspace Utilities Container
   workspace:
+    container_name: workspace
     build: ./build/workspace
     volumes:
       - ./:/var/www
+      - ./vendor:/var/www/vendor
+      - ./storage:/var/www/storage
     links:
+      - php-fpm
+      - nginx
       - mysql
     tty: true
     networks:
