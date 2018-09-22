@@ -32,5 +32,65 @@
 > docker exec -i workspace ./vendor/bin/phpunit tests/
 
 
+## APIs
+
+### Place Order
+
+Route: /order
+Method: POST
+
+Request:
+```
+{
+    "origin": ["START_LATITUDE", "START_LONGTITUDE"],
+    "destination": ["END_LATITUDE", "END_LONGTITUDE"]
+}
+```
+
+Response:
+```
+{
+    "id": <order_id>,
+    "distance": <total_distance>,
+    "status": "UNASSIGN"
+}
+```
+
+### Take Order
+
+Route: /order/:id
+Method: PUT
+
+Request:
+```
+{
+    "status":"taken"
+}
+```
+
+Response:
+```
+{
+    "status": "SUCCESS"
+}
+```
+
+### List Orders	
+
+Route: /order?page=:page&limit=:limit
+Method: GET
+
+Response:
+```
+[
+    {
+        "id": <order_id>,
+        "distance": <total_distance>,
+        "status": <ORDER_STATUS>
+    },
+    ...
+]
+```
+
 
 Cheers !
