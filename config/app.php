@@ -103,9 +103,18 @@ return [
     | Predefined Status Configuration
     |--------------------------------------------------------------------------
     |
-    | Here you may configure all statuses of orders
+    | Here you may update configure all statuses of orders
     |
     */
     'order_status' => ['unassign'=>'UNASSIGN', 'success'=>'SUCCESS'],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Google MAP API Key
+    |--------------------------------------------------------------------------
+    |
+    | Here you may update configure for google map api
+    |
+    */
+    'google_map_api_key' => "AIzaSyDORNaYt0uqzoJUhJndkrWHF4JMAbD0vOA",
 ];

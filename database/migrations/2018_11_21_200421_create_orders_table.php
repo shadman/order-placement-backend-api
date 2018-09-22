@@ -15,12 +15,12 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->decimal('start_latitude', 10, 0);
-            $table->decimal('start_longitude', 10, 0);
-            $table->decimal('end_latitude', 10, 0);
-            $table->decimal('end_longitude', 10, 0);
-            $table->decimal('distance', 10, 2);
-            $table->enum('status', array('UNASSIGN', 'SUCCESS '));
+            $table->decimal('start_latitude', 10, 6);
+            $table->decimal('start_longitude', 10, 6);
+            $table->decimal('end_latitude', 10, 6);
+            $table->decimal('end_longitude', 10, 6);
+            $table->integer('distance');
+            $table->enum('status', array('UNASSIGN', 'SUCCESS'));
             $table->timestamp('created_at');
         });
     }

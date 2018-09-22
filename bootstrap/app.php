@@ -24,12 +24,10 @@ $app = new Laravel\Lumen\Application(
 );
 
 $app->withFacades();
- $app->withEloquent();
+$app->withEloquent();
 
 $app->configure('app');
 $app->configure('database');
-
-
 
 /*
 |--------------------------------------------------------------------------
@@ -54,18 +52,27 @@ $app->singleton(
 
 /*
 |--------------------------------------------------------------------------
-| Register Middleware
+| Register Service Providers
 |--------------------------------------------------------------------------
 |
-| Next, we will register the middleware with the application. These can
-| be global middleware that run before and after each request into a
-| route or middleware that'll be assigned to some specific routes.
+| Here we will register all of the application's service providers which
+| are used to bind services into the container. Service providers are
+| totally optional, so you are not required to uncomment this line.
 |
 */
 
- $app->routeMiddleware([
- 	'jwt.auth' => App\Http\Middleware\JwtMiddleware::class,
- ]);
+ //$app->register(GoogleMaps\ServiceProvider\GoogleMapsServiceProvider::class);
+
+
+/*
+|--------------------------------------------------------------------------
+| Register Alias
+|--------------------------------------------------------------------------
+|
+*/
+
+ //$app->withFacades(true, ['GoogleMaps\Facade\GoogleMapsFacade' => 'GoogleMaps']);
+
 
 /*
 |--------------------------------------------------------------------------
