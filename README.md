@@ -25,6 +25,10 @@
 - Setup Docker and Docker Compose (Prerequisite)
 - Execute bash script
 
+> ./start.sh
+
+or 
+
 > bash start.sh
 
 
@@ -33,11 +37,19 @@
 > docker exec -i workspace ./vendor/bin/phpunit tests/
 
 
+## Configuration Files:
+
+- Google Map API Key: `config/app.php` param `google_map_api_key`
+- Database Config: `.env` file contains all database information and environment variables
+
+> Note: I have added google map api, after sometime will remove that from account.
+
+
 ## APIs
 
 ### Place Order
 
-Route: /order
+Route: http://localhost:8080/order
 Method: POST
 
 Request:
@@ -59,7 +71,7 @@ Response:
 
 ### Take Order
 
-Route: /order/:id
+Route: http://localhost:8080/order/:id
 Method: PUT
 
 Request:
@@ -78,7 +90,7 @@ Response:
 
 ### List Orders	
 
-Route: /order?page=:page&limit=:limit
+Route: http://localhost:8080/order?page=:page&limit=:limit
 Method: GET
 
 Response:
