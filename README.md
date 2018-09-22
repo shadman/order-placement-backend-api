@@ -18,6 +18,7 @@
 - Composer
 - Docker Containers for Setting up application
 - start.sh bash script for deployment
+- Will work with port 8080, as required
 
 
 ## Setup Application
