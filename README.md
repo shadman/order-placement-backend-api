@@ -22,6 +22,7 @@
 
 ## Setup Application
 
+- Setup Docker and Docker Compose (Prerequisite)
 - Execute bash script
 
 > bash start.sh
