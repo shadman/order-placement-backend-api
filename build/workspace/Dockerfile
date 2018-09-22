@@ -11,13 +11,12 @@ ENV TERM xterm
 
 # Install "software-properties-common" (for the "add-apt-repository")
 RUN apt-get update && apt-get install -y \
-    software-properties-common
+    software-properties-common \
+    libpq-dev \
+    git
 
 # Clean up, to free some space
 RUN apt-get clean
-
-# Source the bash
-RUN . ~/.bashrc
 
 # Clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

@@ -10,6 +10,8 @@ services:
       - "9000"
     links:
       - mysql
+    depends_on:
+      - mysql
     networks:
       ordernet:
         ipv4_address: 172.21.0.6
@@ -19,10 +21,13 @@ services:
     container_name: nginx
     build: ./build/nginx
     volumes:
-      - ./var/www/storage/logs/nginx/:/var/log/nginx
+      - ./storage/logs/nginx/:/var/log/nginx
       - ./:/var/www
+      - ./build/nginx/nginx.conf:/etc/nginx/nginx.conf
     ports:
-      - "8080:80"
+      - "81:80"
+      - "8080:8080"
+      - "444:443"
     links:
       - php-fpm
     networks:
@@ -65,6 +70,8 @@ services:
       - ./vendor:/var/www/vendor
       - ./storage:/var/www/storage
     links:
+      - mysql
+    depends_on:
       - php-fpm
       - nginx
       - mysql
